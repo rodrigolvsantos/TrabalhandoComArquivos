@@ -1,27 +1,25 @@
 package application;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Program {
 
 	public static void main(String[] args) {
 		
-		String path = "C:\\Arquivos\\in.txt";
+		String[] lines = new String[] {"Good Morning", "Good Afternoon", "Good Night"};
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(path) )) {
-				
-			String line = br.readLine();
-			
-			while (line != null) {
-				System.out.println(line);
-				line = br.readLine();
+		String path = "C:\\Arquivos\\Escrita\\out.txt";
+		
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))){
+			for (String line : lines) {                            /*FileWriter(path) - Create a new one and replace*/
+				bw.write(line);                                    /*FileWriter(path,true) - Create a new one if you don't have it and add*/   
+				bw.newLine();
 			}
-		}catch (IOException e) {
-			System.out.println("Error" +e.getMessage());
-		}	
-	}
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+	}  
 }
